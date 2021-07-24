@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
- 
+import { Button } from './Components/Button.style'
 
 
 function App() {
@@ -10,15 +10,13 @@ function App() {
     const response = await fetch(url)
     const data = await response.json()
     setData(data.message)
+    console.log(data)
   }
 
-  useEffect( () => {
-    grabData('/api')
-}, [])
 
   return (
   <>
-  <h2>{data ? data : 'loading'}</h2>
+  {<Button onClick={() => grabData('/submitHS')}>{data}</Button> }
   </>
   );
 }
