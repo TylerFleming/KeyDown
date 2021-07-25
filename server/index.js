@@ -9,23 +9,33 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-// const db = mysql.createConnection({
-    
-// })
-
 const dbPool = mysql.createPool({
 
 })
-  
+
 
 app.post("/submitHS", (req, res) => {
-    console.log(req.body)
+    const { name, wpm } = req.body;
+
+    dbPool.query(`INSERT INTO highscores (name, wpm) values ("${name}", ${wpm})`, (err, results, fields) => {
+        if (err) {
+            res.json({
+                message: 'There was an error!'
+            })
+            console.log(err)
+        } else {
+            res.json({
+                message: 'Highscore submitted!'
+            })
+            console.log('highscore submitted')
+        }
+    })
 
 })
 
 app.get("/geths", (req, res) => {
 
-    dbPool.query("SELECT * FROM highscores", (err, results, fields) => {
+    dbPool.query("SELECT name, wpm FROM highscores ORDER BY wpm DESC", (err, results, fields) => {
 
         if ( err ) {
             res.json({
