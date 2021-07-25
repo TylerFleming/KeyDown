@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-
+import Button from './Components/Button'
 
 function App() {
 
   return (
     <>
-    test
+      <Button text="this is a test" />
     </>
   );
 }
