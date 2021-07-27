@@ -6,7 +6,7 @@ const Header = ({text, className, cb}) => {
 
     return (
         <header className={className}>
-            <Logo text="KeyDown" />
+            <h1><Logo text="KeyDown" /></h1>
             <StyledNav cb={cb} />
         </header>
     )
