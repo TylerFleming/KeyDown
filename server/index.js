@@ -4,28 +4,46 @@ const PORT =  process.env.PORT || 3001
 const app = express()
 const mysql = require('mysql2')
 
-const db = mysql.createConnection({
-    host: '',
-    user: '',
-    password: '',
-    database: ''
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+const dbPool = mysql.createPool({
+
 })
 
-app.get("/submitHS", (req, res) => {
 
-   const hs = {
-        name: 'test',
-        wpm: 122
-    }
+app.post("/submitHS", (req, res) => {
+    const { name, wpm } = req.body;
 
-    db.query("INSERT INTO highscores SET ?", hs, (err, result) => {
+    dbPool.query(`INSERT INTO highscores (name, wpm) values ("${name}", ${wpm})`, (err, results, fields) => {
         if (err) {
             res.json({
-                message: 'there was an error'
+                message: 'There was an error!'
+            })
+            console.log(err)
+        } else {
+            res.json({
+                message: 'Highscore submitted!'
+            })
+            console.log('highscore submitted')
+        }
+    })
+
+})
+
+app.get("/geths", (req, res) => {
+
+    dbPool.query("SELECT name, wpm FROM highscores ORDER BY wpm DESC", (err, results, fields) => {
+
+        if ( err ) {
+            res.json({
+                message: `there was an error ${err}`
             })
         } else {
             res.json({
-                message: `score of ${hs.wpm} submitted succesfully`
+                message: results
             })
         }
     })
