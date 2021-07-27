@@ -11,4 +11,19 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
     }
 
+    .stats {
+        margin-top: 100px;
+        text-align: center;
+        span {
+            margin-left: 50px;
+            font-size: 30px;
+            color: white;
+            font-family: 'lato';
+            font-weight: bold;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
 `

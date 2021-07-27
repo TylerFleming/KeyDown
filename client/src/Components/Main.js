@@ -1,12 +1,40 @@
-import { useReducer } from "react"
+import { useReducer, createContext } from "react"
+import { StyledWords } from "../ComponentStyles/Words.styles"
 
+
+export const gameContext = createContext()
 
 function gameReducer(state, action) {
     switch (action.type) {
         case 'typed word':
             return {
-                ...state, wpm: state.wpm +1,
+                ...state, wpm: state.keyCount / 5,
             }
+            break;
+
+        case 'sound muted':
+            return {
+                ...state, sounds: false,
+            }
+            break;
+
+        case 'game start':
+            return {
+                ...state, gameStart: true,
+            }
+
+
+        case 'key pressed':
+            return {
+                ...state, keyCount: state.keyCount +1,
+            }
+            break;
+
+        case 'reset':
+            return {
+                initialState,
+            }
+            break;
 
 
         default:
@@ -17,9 +45,9 @@ function gameReducer(state, action) {
 const initialState = {
     name: '',
     wpm: 0,
-    acurracy: 0,
-    timer: 60,
-    gameStart: false
+    keyCount: 0,
+    sounds: true,
+    gameStart: false,
 }
 
 const Main = ({className}) => {
@@ -28,7 +56,10 @@ const Main = ({className}) => {
 
     return (
         <section className={className}>
-            
+            <gameContext.Provider value={{ state, dispatch }}>
+                <StyledWords />
+            </gameContext.Provider>
+
         </section>
     )
 }
