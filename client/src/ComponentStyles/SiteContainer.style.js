@@ -4,4 +4,5 @@ export const SiteContainer = styled.div`
 
     display: flex;
     background: ${ props => props.theme.backgroundColor };
+    height: 100vh;
 `

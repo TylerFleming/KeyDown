@@ -5,5 +5,6 @@ export const StyledHeader = styled(Header)`
     padding: 10px;
     display: flex;
     width: 100%;
-    justify-content: space-between
+    justify-content: space-between;
+    overflow: hidden;
 `
