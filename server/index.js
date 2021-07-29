@@ -44,7 +44,7 @@ app.get("/geths", (req, res) => {
             })
         } else {
             res.json({
-                message: results
+                message: [results]
             })
         }
     })

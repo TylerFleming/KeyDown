@@ -35,7 +35,6 @@ const Modal = ({className, show}) => {
             },
             body: JSON.stringify(hsData)
          })
-         console.log(submitHS)
          const success = await submitHS.json()
         setStatus(success.message)
         setHideInputSubmitBtn(true)
