@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useRef } from "react"
+import { useContext, useState, useEffect, useRef, createContext } from "react"
 import { wordContext } from './Words'
 import { gameContext } from './Main'
 import gameSound from '../Sounds/gamesound.wav'
@@ -6,9 +6,11 @@ import { StyledModal } from "../ComponentStyles/Modal.style"
 
 const sound = new Audio(gameSound)
 
+export const modalState = createContext()
+
 const InputText = ({className, cb}) => {
 
-    
+
     const {currentWord, generateNewWord} = useContext(wordContext)
 
     const { state, dispatch } = useContext(gameContext)
@@ -16,8 +18,6 @@ const InputText = ({className, cb}) => {
     const [ currentInput, setCurrentInput ] = useState('')
     
     const [ count, setCount ] = useState(null)
-
-    const [ showModal, setShowModal ] = useState(false)
 
     const stats = useRef(null)
 
@@ -42,7 +42,7 @@ const InputText = ({className, cb}) => {
             if ( count >= 1 ) {
                 countDown()
             } else {
-                setShowModal(true)
+                dispatch({type: 'show modal'})
                 stats.current.style.visibility = "hidden"
             }
     }, [count])
@@ -66,7 +66,7 @@ const InputText = ({className, cb}) => {
             return
         }
         dispatch({type: "game start"})
-        setCount(60)
+        setCount(3)
     }
 
     return (
@@ -79,9 +79,11 @@ const InputText = ({className, cb}) => {
 
         </div>
 
-        { showModal && count === 0 ? <StyledModal show /> : null}
+        <modalState.Provider value={{stats, currentInput, setCurrentInput, generateNewWord}}>
+        { state.showModal && count === 0 ? <StyledModal show /> : null}
 
-        {/* <StyledModal show />         */}
+        </modalState.Provider>
+
         </>
     )
 }

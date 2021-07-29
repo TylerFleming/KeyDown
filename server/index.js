@@ -5,9 +5,10 @@ const app = express()
 const mysql = require('mysql2')
 
 
-app.use(express.urlencoded({
+app.use(express.json({
     extended: true
 }));
+
 
 const dbPool = mysql.createPool({
 
@@ -15,9 +16,10 @@ const dbPool = mysql.createPool({
 
 
 app.post("/submitHS", (req, res) => {
-    const { name, wpm } = req.body;
-
-    dbPool.query(`INSERT INTO highscores (name, wpm) values ("${name}", ${wpm})`, (err, results, fields) => {
+    let data = req.body;
+    const { user, wpm } = data
+    dbPool.query(`INSERT INTO highscores (name, wpm) values ('${user}', ${wpm})`, (err, results, fields) => {
+        console.log(user, wpm)
         if (err) {
             res.json({
                 message: 'There was an error!'
@@ -27,7 +29,6 @@ app.post("/submitHS", (req, res) => {
             res.json({
                 message: 'Highscore submitted!'
             })
-            console.log('highscore submitted')
         }
     })
 
