@@ -1,23 +1,33 @@
 import { useEffect, useState } from "react"
 
-const Highscores = () => {
+const Highscores = ({className}) => {
 
     const [ loading, setLoading ] = useState('Loading Highscores...')
-    const [ loadedUsers, setLoadedUsers ] = useState([])
+    const [ highScores, setHighScores ] = useState([])
+
     const loadHighScores = async () => {
         const data = await fetch('/geths')
-        const results =  await data.json()
-
+        let results =  await data.json()
+        results = results.message
+        let mappedData = results.map((result, index) => `Rank ${index+1} ${result.name} WPM: ${result.wpm}`);
+        setHighScores([...mappedData])
+        setLoading('Highscores')
     }
     useEffect( () => {
         loadHighScores()
-    }, [])    
+    }, [loading])    
 
     return (
-        <section>
+        <section className={className}>
             <div className="highscores">
                 <h2>{loading}</h2>
-
+                {
+                    highScores.map((highscore, index) => {
+                        return <>
+                        <h3 key={index}>{highscore}</h3>
+                        </>
+                    })
+                }
             </div>
         </section>
     )
