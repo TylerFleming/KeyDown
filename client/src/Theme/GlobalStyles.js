@@ -24,6 +24,11 @@ export const GlobalStyle = createGlobalStyle`
                 margin-left: 0;
             }
         }
+        
+        @media (max-width: 767px) {
+                margin-top: 0;
+                padding: 20px 0;
+            }
     }
 
 `

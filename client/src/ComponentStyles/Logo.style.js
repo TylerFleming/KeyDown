@@ -7,5 +7,9 @@ font-size: 50px;
 font-family: ${props => props.theme.fonts.pacifico};
 color: ${props => props.theme.colors.white};
 text-decoration: none;
+
+@media (max-width: 767px) {
+        font-size: 30px;
+    }
 `
 

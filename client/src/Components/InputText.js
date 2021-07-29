@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import { wordContext } from './Words'
 import { gameContext } from './Main'
 import gameSound from '../Sounds/gamesound.wav'
@@ -19,6 +19,8 @@ const InputText = ({className, cb}) => {
 
     const [ showModal, setShowModal ] = useState(false)
 
+    const stats = useRef(null)
+
     const checkCurrentInput = (e) => {
         startGame()
         addKeycount(e)
@@ -33,14 +35,21 @@ const InputText = ({className, cb}) => {
             dispatch({type: "typed word"})
         }
     }
-
+    
     useEffect(() => {
+            stats.current.style.visibility = "visible"
+
             if ( count >= 1 ) {
                 countDown()
             } else {
                 setShowModal(true)
+                stats.current.style.visibility = "hidden"
             }
     }, [count])
+
+    useEffect(() => {
+        stats.current.style.visibility = "visible"
+    }, [])
 
     const countDown = () => {
         setTimeout(() => {
@@ -64,15 +73,15 @@ const InputText = ({className, cb}) => {
         <>
         <input className={className} onChange={(e) => checkCurrentInput(e)} value={currentInput} type="text" placeholder="Type to start"/>
 
-        <div className="stats">
+        <div className="stats" ref={stats}>
             <span>wpm: {state.wpm}</span>
             <span>time: {count}</span>
 
         </div>
 
-        {/* { showModal && count === 0 ? <StyledModal show /> : null} */}
+        { showModal && count === 0 ? <StyledModal show /> : null}
 
-        <StyledModal show />        
+        {/* <StyledModal show />         */}
         </>
     )
 }
