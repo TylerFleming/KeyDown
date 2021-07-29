@@ -16,7 +16,7 @@ export const StyledInputText = styled(InputText)`
 
         @media (max-width: 767px) {
         font-size: 30px;
-    }
+        }
     }
 
 

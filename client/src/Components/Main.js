@@ -6,9 +6,15 @@ export const gameContext = createContext()
 
 function gameReducer(state, action) {
     switch (action.type) {
+        case 'typed name':
+            return {
+                ...state, name: action.payload.name,
+            }
+            break;
+
         case 'typed word':
             return {
-                ...state, wpm: state.keyCount / 5,
+                ...state, wpm: Math.floor(state.keyCount / 5),
             }
             break;
 
@@ -30,9 +36,22 @@ function gameReducer(state, action) {
             }
             break;
 
+
+        case 'show modal':
+            return {
+                ...state, showModal: true,
+            }
+            break;
+
         case 'reset':
             return {
-                initialState,
+                name: '',
+                wpm: 0,
+                keyCount: 0,
+                sounds: true,
+                gameStart: false,
+                showModal: false,
+                
             }
             break;
 
@@ -48,6 +67,7 @@ const initialState = {
     keyCount: 0,
     sounds: true,
     gameStart: false,
+    showModal: false,
 }
 
 const Main = ({className}) => {
