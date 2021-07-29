@@ -15,12 +15,8 @@ export const StyledWords = styled(Words)`
     font-size: 75px;
     color: ${props => props.theme.colors.white};
 
-    span.success {
-        color: #90ee90;
-    }
-
-    span.error {
-        color: #e63c2e;
+    @media (max-width: 767px) {
+        font-size: 45px;
     }
 `
 

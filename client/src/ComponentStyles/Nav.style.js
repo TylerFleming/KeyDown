@@ -8,6 +8,10 @@ export const StyledNav = styled(Nav)`
         list-style: none;
         display: flex;
         align-items: center;
+
+        @media (max-width: 767px) {
+        padding: 0;
+        }
     }
 `
 

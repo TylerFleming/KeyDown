@@ -13,6 +13,11 @@ export const StyledInputText = styled(InputText)`
     
     &::placeholder {
         opacity: 0.4;
+
+        @media (max-width: 767px) {
+        font-size: 30px;
     }
+    }
+
 
 `

@@ -1,13 +1,15 @@
+import { StyledButton } from "../ComponentStyles/Button.style"
 
-const Modal = ({className, show}) => {
+
+const Modal = ({className, show, big, props}) => {
     return (
         <div className={className}>
             <div className="modal-container">
                 <div className="name">
                     <h2>Name</h2>
                     <input type="text" />
-                    <button>Submit Highscore</button>
-                    <button>Retry</button>
+                     <StyledButton primary> Submit Highscore </StyledButton>
+                     <StyledButton> Retry </StyledButton>
                 </div>
             </div>
         </div>
