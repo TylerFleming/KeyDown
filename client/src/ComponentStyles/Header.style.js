@@ -6,5 +6,4 @@ export const StyledHeader = styled(Header)`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    overflow: hidden;
 `

@@ -24,7 +24,6 @@ const InputText = ({className, cb}) => {
     const checkCurrentInput = (e) => {
         startGame()
         addKeycount(e)
-        console.log(state)
         let currentLetter = e.target.value
         let checkArray = [...currentLetter].join('')
         setCurrentInput(e.target.value)

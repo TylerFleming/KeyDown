@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router  } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { GlobalStyle } from './Theme/GlobalStyles'
 import { ThemeProvider } from 'styled-components'
 import { purpleTheme, darkTheme } from './Theme/Themes'
@@ -7,7 +7,6 @@ import { SiteContainer } from './ComponentStyles/SiteContainer.style'
 import { ContentContainer } from './ComponentStyles/ContentContainer.style';
 import { StyledHeader } from './ComponentStyles/Header.style'
 import { StyledMain } from './ComponentStyles/Main.styles'
-
 
 function App() {
 
