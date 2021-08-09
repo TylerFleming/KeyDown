@@ -11,7 +11,7 @@ const Words = ({className}) => {
 
     
     const chooseRandomWord = () => {
-        return WordData[Math.floor(Math.random() * 1000)]
+        return WordData[Math.floor(Math.random() * WordData.length)]
     }
 
     const generateNewWord = () => {
