@@ -65,7 +65,7 @@ const InputText = ({className, cb}) => {
             return
         }
         dispatch({type: "game start"})
-        setCount(3)
+        setCount(60)
     }
 
     return (
