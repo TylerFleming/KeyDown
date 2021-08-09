@@ -44,19 +44,21 @@ app.get("/geths", (req, res) => {
             })
         } else {
             res.json({
-                message: [results]
+                message: results
             })
         }
     })
 })
 
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get("/api", (req, res) => {
-    res.json({
-        message: 'this is a test'
-    })
-})
 
-app.listen(PORT, () => {
-    console.log(`server listening on ${PORT}`)
-})
+
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
+
+app.listen(PORT, () => {})

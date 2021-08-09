@@ -1,7 +1,7 @@
 import { useReducer, createContext } from "react"
 import { StyledWords } from "../ComponentStyles/Words.styles"
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Highscores from "./Highscores"
+import { StyledHighscores } from "../ComponentStyles/Highscores.style"
 
 export const gameContext = createContext()
 
@@ -79,7 +79,7 @@ const Main = ({className}) => {
         <section className={className}>
         <Switch>
         <Route exact path='/highscores'>
-            <Highscores />
+            <StyledHighscores />
         </Route>
         <gameContext.Provider value={{ state, dispatch }}>
             <StyledWords />
